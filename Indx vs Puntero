@@ -1,0 +1,37 @@
+#include <iostream>
+
+int main()
+{
+    int a = 10;
+    int *p = &a;
+    std::cout<<a<<"\n";
+    std::cout<<p<<"\n";
+    int n = 5;
+    
+    int A[5] = {1, 2, 3, 4, 5}; //Puntero constante al primer elemento
+    p = A;
+    std::cout<<p<<"\n"; //direccin del primer elemento del array
+    std::cout<<*p<<"\n"; //contenido del array
+    
+    std::cout<<p+1<<"\n"; //direccin del primer elemento + 1
+    std::cout<<*(p+1)<<"\n"; //2do elemento del array
+    
+
+//RECORRER ARRAY CON INDX
+    for(int i = 0; i < n; i++){
+        std::cout<< A[i] << ", ";
+    }
+    std::cout<<"\n";
+    
+//RECORRER CON  ÍNDICE CON PUNTEROS
+    for(int i = 0;i<n;i++)
+        std::cout<<*(A+i)<< ", ";
+    std::cout<<"\n";
+    
+    
+//RECORRER CON PUNTEROS (A LA DIRECCIÓN DE MEMORIA)
+    for (int *p = A; p < A+n ;p++) //(la primera direccin de memoria; A(1ra posición) + la cantidad de elementos; acceder a la siguiente posición de memoria)
+        std:: cout<< *p << ", ";
+
+    return 0;
+}
