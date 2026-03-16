@@ -1,0 +1,54 @@
+#include <iostream>
+void Reducir(int *arr, int&n, int m){
+    int ronda = 1;
+    while(n>=m){
+        std::cout<<"Ronda "<< ronda++<<": ";
+        int grupos = n/m;
+        int sobrantes = n%m;
+        
+        int* posicion = arr;
+        int* indice = arr;
+        
+        for (int i=0; i<grupos;i++){
+            int suma = 0;
+            for(int j = 0; j<m;j++){
+                suma += *posicion;
+                posicion++;
+            }
+            *indice = suma;
+            indice++;
+        }
+        for (int i = 0; i<sobrantes;i++){
+            *indice = *posicion;
+            indice++;
+            posicion++;
+        }
+        n = grupos + sobrantes; //actualizar tamaño
+        
+        for(int* p = arr; p<arr + n;p++){ //imprimir
+            std::cout<<*p<< " ";
+        }
+        std::cout<<std::endl;
+        
+        indice = arr; //reiniciar direccion (punteros)
+        posicion = arr;
+        
+    }
+}
+
+int main() {
+    int arr[] = {3, 1, 0, -5, 2, 3, 4, 2, 0, 1, 5};
+    int n = 11;
+    int m = 3;
+    
+    std::cout << "Array original: ";
+    for (int* p = arr; p < arr + n; p++) {
+        std::cout << *p<< " ";
+    }
+    std::cout << "\n" << std::endl;
+    
+    Reducir(arr, n, m); //LALALALLAA
+    
+    return 0;
+}
+
