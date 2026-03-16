@@ -1,0 +1,30 @@
+#include <iostream>
+
+int main()
+{
+    int tam = 11;
+    char A[11] ={'c','+','+',' ','j','a','v','a',' ',' ',' '};
+    char*p= A+tam-1;
+    int espacios=0;
+    while(*p==' '){ //contar espacios
+        espacios++;
+        p--;
+    }
+    
+    for (char*p=A; p<A+tam;p++){ //A+tam es la dirección del 1er elemento de A más 11 posiciones, entonces llegará hasta la posicion 10
+        std::cout<<*p<<", ";
+    }
+    
+    std::cout<<"\n";
+    for(char*p=A+tam-1-espacios;p>=A;p--){ //empieza desde atrás, y a la posición donde debería terminar la palabra, le da ese valor Y procede a limpiar ese lugar
+        *(p+espacios)=*p;
+        *p=' ';
+    }
+    
+    std::cout<<"\n";
+    std::cout<<"Espacios: "<<espacios<<"\n"; //imprimir
+    for(char*p=A;p<A+tam;p++) std::cout<<*p<< ", ";
+    std::cout<<"\n";
+    
+    return 0;
+}
