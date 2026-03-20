@@ -1,3 +1,6 @@
+#include <iostream>
+
+int main()
 {
     int n = 7;
     int a[n] = {3, 3, 2, 6, 9, 8, 6};
