@@ -1,0 +1,35 @@
+#include <iostream>
+
+int main()
+{
+    int tam = 7;
+    int n=3;
+    int arr[tam] = {3, 3, 2, 6, 9, 8, 6};
+    int llenar = tam-n+1;
+    
+    std::cout<< "[";
+    for(int* ptr =arr; ptr<arr + tam;ptr++){
+        std::cout<< *ptr<< " ";
+    }
+    
+    std::cout<< "]" << std::endl;
+    
+    for(int* ptr=arr; ptr<arr + llenar;ptr++){
+        int suma=0;
+        for(int j=0;j<n;j++){
+            suma+= *(ptr+j);
+        }
+        *ptr=suma;
+    }
+    for(int* ptr=arr+llenar;ptr<arr + tam;ptr++){
+        *ptr = 0;
+    }
+    
+    std::cout<< "[";
+    for(int* ptr =arr; ptr<arr + tam;ptr++){
+        std::cout<< *ptr<< " ";
+    }
+    std::cout<< "]" << std::endl;
+    
+    return 0;
+}
