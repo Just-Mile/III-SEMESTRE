@@ -1,0 +1,43 @@
+#include <iostream>
+
+bool Es_igual(char* arr, char* a, int n){ //n = tamaño de la palabra a buscar
+     
+    for(int i = 0; i < n; i++){
+        if(*(a+i) != *(arr + i)) return false;  // ← Corregido aquí
+    }
+    
+    return true; 
+}
+
+int main()
+{
+    int m=12;
+    int n=5;
+    char dicc[m] = {'h', 'o', 'l', 'a', 'a', 'd', 'i', 'o', 's', 'b', 'y', 'e'};
+    char palabra[n] = {'a', 'd', 'i', 'o', 's'};
+    
+    
+    char* d = dicc;
+    char* a = palabra;
+    int i= 0;
+    
+    while(i<m-n){
+        if(*(a+i) == *(d+i)){
+            char* arr = d+i;
+            bool comprobar = Es_igual(arr, a, n);
+            if(comprobar == true){
+                std::cout<<"Existe"<<std::endl;
+                break;
+            }
+        } else{
+            i++;
+        }
+    }
+    if(i=m-n){
+        std::cout<<"No existe"<<std::endl;
+    }
+    
+ 
+    
+    return 0;
+}
