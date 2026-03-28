@@ -21,20 +21,35 @@ void contar_espacios(char* A, int &n){
     char* p_final = q;
     int esp_ig=(espac_der + espac_izq)/2;
     
-    int idk=0;
-    for(char *p=A; p<=A+n-1; p++){
-       *(A+idk) = *(p+idk);
-       
-        idk++;
-        std::cout<<*(A+idk)<<", ";
-    }
-    std::cout<<std::endl;
     
-
+    
+    char* escritor = A;         
+    char* lector = p_inicio;    
+    
+    for(int i = 0; i < esp_ig; i++){
+        *escritor = ' ';
+        escritor++;
+    }
+    
+    while(lector <= p_final){
+        *escritor = *lector;
+        escritor++;
+        lector++;
+    }
+    
+    int espacios_restantes = (espac_der + espac_izq) - esp_ig;
+    for(int i = 0; i < espacios_restantes; i++){
+        *escritor = ' ';
+        escritor++;
+    }
+    
+    // Mostrar resultado
+    std::cout << "Centrado: ";
+    for(char* r = A; r < A+n; r++){
+        std::cout << *r<< ',';
+    }
+    std::cout << std::endl;
 }
-
-
-
 
 int main()
 {
