@@ -1,0 +1,45 @@
+#include <iostream>
+
+void contar_espacios(char* A, int &n){
+    int espac_der = 0;
+    int espac_izq = 0;
+    
+    char* p = A;
+    while(p<A+n-1){
+        if(*p == ' ') espac_der++;
+        else break;
+        p++;
+    }
+    char* p_inicio = p; 
+  
+    char* q = A+n-1;
+    while(q>=A){
+        if(*q == ' ') espac_izq++;
+        else break;
+        q--;
+    }
+    char* p_final = q;
+    int esp_ig=(espac_der + espac_izq)/2;
+    
+    int idk=0;
+    for(char *p=A; p<=A+n-1; p++){
+       *(A+idk) = *(p+idk);
+       
+        idk++;
+        std::cout<<*(A+idk)<<", ";
+    }
+    std::cout<<std::endl;
+    
+
+}
+
+
+
+
+int main()
+{
+    int n = 12;
+    char A[n]={' ',' ',' ',' ','j', 'a', 'v', 'a', ' ', '+', ' ', ' '};
+    contar_espacios(A, n);
+    return 0;
+}
