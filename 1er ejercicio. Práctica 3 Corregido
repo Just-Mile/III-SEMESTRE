@@ -1,0 +1,48 @@
+#include <iostream>
+void center_text(char *A, int n){
+    
+    char* p = A;
+    int spc_left = 0;
+    for( ; p<A+n && *p==' '; p++, spc_left++);
+    
+    char* q = A+n-1;
+    int spc_right = 0;
+    for( ; q>=A && *q==' '; q--, spc_right++);
+    
+    int equal_spc= (spc_left + spc_right)/2;
+    int displac = spc_left - equal_spc;
+       
+    if(displac>0){
+        std::cout<<"Recorrer a la izq"<<std::endl;
+        for(char* src = p, *dest = A+equal_spc; src<=q; *dest++ = *src++);
+        for(char* src = A+n-equal_spc; src < A+n; *src++ =' ');
+        
+    } else if(displac <0){
+        std::cout<<"Recorrer a la der"<<std::endl;
+        displac = -displac;
+        for(char* src = q, *dest = A+n-equal_spc-1;src>=p; *dest -- = *src--);
+        for(char* src = A; src < A+equal_spc; *src++ =' ');
+        
+    } else{
+        std::cout<<"Ya está centrado"<<std::endl;
+       
+    }
+    
+    for(char* p = A; p<A+n; std::cout<<*p++<<',');
+    std::cout << std::endl;
+    
+   
+}
+
+int main()
+{
+    int n = 12;
+    char A[n] = {' ', 'j', 'a', 'v', 'a', ' ', '+', ' ', ' ', ' ', ' ', ' '};
+    
+    for(char* p = A; p<A+n; std::cout<<*p++<<',');
+    std::cout << std::endl;
+    
+    center_text(A, n);
+ 
+    return 0;
+}
