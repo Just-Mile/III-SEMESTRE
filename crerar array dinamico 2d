@@ -1,0 +1,35 @@
+
+#include <iostream>
+
+int main()
+{
+    int fil=14;
+    int col=7;
+    int par=2;
+    int **A = new int*[fil];
+    for(int** p_fil=A; p_fil<A+fil;p_fil++){
+        *p_fil = new int[col];
+    }
+    
+
+    for(int** p_fil = A; p_fil<A + fil;p_fil++){
+        for(int* p_col = *p_fil; p_col< *p_fil + col; p_col++){
+             if (p_fil - A == 0 || p_fil - A == fil - 1 ||
+                p_col - *p_fil == 0 || p_col - *p_fil == col - 1) {
+                *p_col = -100;
+            } else {
+                *p_col = 0;
+            }
+            
+            std::cout<<*p_col<<" ";
+        }
+         std::cout << std::endl;
+    }
+    
+    
+    for(int** p_fil=A; p_fil<A+fil;p_fil++){
+        delete []*A;
+    }   
+    delete []A;
+    return 0;
+}
