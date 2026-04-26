@@ -1,0 +1,36 @@
+#include <iostream>
+
+void bubbleSort(int* arr, int n) {
+
+    for (int passes = 0; passes < n - 1; passes++) {
+        for (int* i = arr; i < arr + n - passes - 1; i++) {
+            int* j = i + 1;
+            if (*i > *j) {
+                int temp = *i;
+                *i = *j;
+                *j = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int size = 7;
+    int data[size] = {64, 34, 25, 12, 22, 11, 90};
+    
+    std::cout << "Original array: ";
+    for (int* i = data; i < data+size; i++) {
+        std::cout << *i << " ";
+    }
+    
+    std::cout<<std::endl;
+    
+    
+    bubbleSort(data, size);
+    
+    std::cout << "Sorted array: ";
+    for (int* i = data; i < data+size; i++) {
+        std::cout << *i << " ";
+    }
+    return 0;
+}
