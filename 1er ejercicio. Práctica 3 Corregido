@@ -1,48 +1,43 @@
 #include <iostream>
-void center_text(char *A, int n){
-    
-    char* p = A;
-    int spc_left = 0;
-    for( ; p<A+n && *p==' '; p++, spc_left++);
-    
-    char* q = A+n-1;
-    int spc_right = 0;
-    for( ; q>=A && *q==' '; q--, spc_right++);
-    
-    int equal_spc= (spc_left + spc_right)/2;
-    int displac = spc_left - equal_spc;
-       
-    if(displac>0){
-        std::cout<<"Recorrer a la izq"<<std::endl;
-        for(char* src = p, *dest = A+equal_spc; src<=q; *dest++ = *src++);
-        for(char* src = A+n-equal_spc; src < A+n; *src++ =' ');
-        
-    } else if(displac <0){
-        std::cout<<"Recorrer a la der"<<std::endl;
-        displac = -displac;
-        for(char* src = q, *dest = A+n-equal_spc-1;src>=p; *dest -- = *src--);
-        for(char* src = A; src < A+equal_spc; *src++ =' ');
-        
-    } else{
-        std::cout<<"Ya está centrado"<<std::endl;
-       
-    }
-    
-    for(char* p = A; p<A+n; std::cout<<*p++<<',');
-    std::cout << std::endl;
-    
-   
-}
+using namespace std;
 
 int main()
 {
     int n = 12;
-    char A[n] = {' ', 'j', 'a', 'v', 'a', ' ', '+', ' ', ' ', ' ', ' ', ' '};
+    char* A = new char[n]{' ', ' ', 'j','a','v', 'a', ' ','+', ' ', ' ', ' ', ' '};
+    //contar espacios der e izq
+    int spc_l = 0;
+    char * ini_w = A;
+    for(; ini_w < A + n && *ini_w == ' '; ini_w++){
+        spc_l++;
+    }
+    cout<<spc_l;
+    cout<< *ini_w<<endl;
     
-    for(char* p = A; p<A+n; std::cout<<*p++<<',');
-    std::cout << std::endl;
+    int spc_r = 0;
+    char* end_w = A+n - 1;
+    for(; end_w >= A && *end_w == ' '; end_w--){
+        spc_r++;
+    }
+    cout<<spc_r;
+    cout<<*end_w<<endl;
     
-    center_text(A, n);
- 
+    
+    int eq_spc = (spc_l + spc_r)/2;
+    if (spc_l > eq_spc){
+        cout<<"A la izq";
+        for(char* lector = ini_w,*write = A + eq_spc; lector <= end_w; *write++ = *lector++);
+        for( ; end_w < A + n; *end_w++ = ' ');
+    }
+    else if(spc_l<eq_spc){
+        cout<<"A la der";
+        for(char* lector = end_w,*write = A + n- eq_spc - 1; lector >= ini_w; *write-- = *lector--);
+        for( ; ini_w >= A; *ini_w-- = ' ');
+    }
+    else{
+        cout<<"Ya está centrado";
+    }
+    
+    for(char* p = A; p < A + n ; p++) cout<<*p<< ", ";
     return 0;
 }
