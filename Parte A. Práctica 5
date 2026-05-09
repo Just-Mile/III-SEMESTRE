@@ -1,0 +1,34 @@
+#include <iostream>
+
+int main()
+{
+    int fil = 14;
+    int col = 7;
+    
+    int** A = new int*[fil];
+    for(int** i = A; i < A + fil; i++){
+        *i = new int[col];
+    }
+    
+    for(int** i = A; i < A + fil; i++){
+        for(int* j= *i; j<*i+col; j++){
+            
+            if(i-A == fil - 2 && j-*i == col - 2) *j = 100;
+            else if(i-A == 0 || i-A == fil - 1 || j-*i == 0 || j-*i == col - 1){
+                *j = -100;
+            } else{
+                *j = 0;
+            }
+            std::cout<<*j<<"\t";
+        }
+        std::cout<<std::endl;
+    }
+    
+    
+    for(int** i = A; i<A + fil; i++){
+        delete[] *i;
+    }
+    delete[] A;
+    
+    return 0;
+}
