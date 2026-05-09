@@ -1,0 +1,120 @@
+#include <iostream>
+
+int main()
+{
+    int fil = 14;
+    int col = 7;
+    int coor = 2;
+    
+    //========== PARTE B ==========
+    int*** A = new int**[fil];
+    for(int*** i = A; i<A+fil; i++){
+        *i = new int*[col];
+        for(int** j = *i; j < *i + col; j++){
+            *j = new int[coor]{0,0};
+        }
+    }
+    
+    for(int*** i = A; i<A+fil; i++){
+        for(int** j = *i; j < *i + col; j++){
+            std::cout<<"( ";
+            for(int* k = *j; k < *j + coor; k++){
+                if(k-*j == 0 && (i - A == 0 || i - A == fil- 1 || j - *i ==0 || j - *i == col - 1)){
+                    *k = -100;
+                }
+                if(k-*j == 0 && i-A == fil - 2 && j- *i == col - 2) *k = 100;
+                std::cout<<*k<<" ";
+            }
+            std::cout<< "),"<<"\t";
+        }
+        std::cout<<std::endl;
+    }
+    //========= PARTE C ==========
+    for(int*** i = A + fil - 2; i >= A; i--){
+        for(int**j = *i + col - 2; j >= *i; j--){
+            if(**j != -100){
+                std::cout<<"Visitando fila: "<< i - A
+                <<" columna: "<<j - *i
+                <<". Recompensa: "<< **j<<std::endl;
+            }
+        }
+    }
+    //======= PARTE D =======
+    std::cout<<std::endl;
+    
+    for(int*** i = A + fil - 2; i >= A; i--){
+        for(int** j = *i + col - 2; j >= *i; j--){
+            if(**j != 100 && **j!= -100){
+                int vAbajo = **(*(i+1) + (j - *i));
+                int vDerecha = **(j+1);
+                
+                /*std::cout<<"Fila: "<< i - A << " Col: "<< j-*i
+                <<"| Vecino de abajo: "<<vAbajo
+                <<" | Vecino de la derecha: "<<vDerecha;
+                */
+                int vA = (vAbajo == -100) ? -200: vAbajo;
+                int vD = (vDerecha == -100) ? -200: vDerecha;
+                
+                //POlÍTICA || ABAJO -| {1}; DERECHA -> {3}
+                if(vA>=vD){
+                    **j = vAbajo - 1;
+                    *(*j + 1) = 1;
+                } else{
+                    **j = vDerecha - 1;
+                    *(*j + 1) = 3;
+                }
+                
+                std::cout<< "Fila: "<< i - A << " Col: "<< j - *i
+                        << " | Recompensa: "<< **j
+                        << " | Política: " << *(*j +1) <<std::endl;
+                
+            }
+          
+        }
+    }
+
+    
+    //========= PARTE E ==========
+    int*** i = A + 1;
+    int** j = *i + 1;
+    
+    while(**j != 100){
+        **j = 0;
+        if(*(*j + 1) == 1){
+            i++;
+            j = *i + (j - *(i-1));
+        }
+        else if(*(*j + 1) == 3){
+            j++;
+            
+        }
+        
+    }
+    
+        
+    //========== MATRIZ CON RECOMPENSA Y POLÍTICA ==========
+    for(int*** i = A + 1; i < A + fil - 1; i++){
+        for(int** j = *i + 1; j < *i + col -1; j++){
+            std::cout<< "( "<<**j<<",  "
+                <<*(*j+1)<<" )  ";
+            
+        }
+        
+        std::cout<<std::endl;
+    }
+    
+    
+    
+    
+    //======= LIBREACIÓN DE MEMORIA =======
+    for(int*** i = A; i<A+fil; i++){
+        for(int** j = *i; j < *i + col; j++){
+            delete[] *j;
+        }
+        delete[] *i;
+    }
+    delete[] A;
+    
+    
+    return 0;
+}
