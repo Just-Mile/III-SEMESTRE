@@ -1,0 +1,44 @@
+
+#include <iostream>
+#include <memory>
+int main()
+{
+    std::unique_ptr<int> p = std::make_unique<int>(15); 
+    std::cout<<*p<<"\n";
+    
+    //std::shared_ptr<int> p1 = std::make_unique<int>(16); //HEAP
+    //std::shared_ptr<int> q = p1;
+    
+    
+    int tam = 5;
+    int num = 1;
+    
+    //======ARRAY DE DATOS======
+    
+    std::unique_ptr<int[]> A = std::make_unique<int[]>(tam); //Array de enteros
+    for(int* q = A.get(); q < A.get() + tam ;q++, num++){ //Recorrer
+        *q=num;
+        std::cout<<*q<<", ";
+    }
+    
+    std::cout<<"\n";
+    
+    
+    
+    //=========ARRAY DE SMARTPOINTERS==========
+    
+    std::unique_ptr<std::unique_ptr<int>[]> B = std::make_unique<std::unique_ptr<int>[]>(tam);
+    for(std::unique_ptr<int>*q = B.get();q < B.get() + tam; q++, num++){
+        *q = std::make_unique<int>(num);
+        num++;
+    }
+    
+    for(std::unique_ptr<int>*q = B.get();q < B.get() + tam; q++, num++){
+        std::cout<<**q<<", ";
+    }
+    
+    //======ARRAY DE SMART
+    
+
+    return 0;
+}
