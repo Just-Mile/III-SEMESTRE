@@ -1,0 +1,48 @@
+//SmartPointers
+#include <iostream>
+#include<memory>
+
+int main()
+{
+    
+    int tam = 8;
+    int num = 1;
+    
+    //======ARRAY DE DATOS======
+    
+    std::unique_ptr<int[]> A (new int[]{4, 6, 6, 1, 1, 2, 3, 3});
+    
+    std::cout<<"\n";
+    
+    
+    int* writer = A.get();
+    for(int* reader = A.get(); reader < A.get() + tam ; reader++){ //Recorrer
+        if(*reader == *(reader+1)){
+            reader++;
+        }
+        *writer = *reader;
+    }
+    
+    std::cout<<*(writer-1)<<", ";
+    
+    
+    for( ; writer< A.get() + tam ; writer++){
+        *writer == 0;
+    }
+    
+    
+    
+    std::cout<<"\n";
+    
+     for(int* q = A.get(); q < A.get() + tam ;q++){ //Recorrer
+        std::cout<<*q<<", ";
+    }
+    
+    std::cout<<"\n";
+    
+    
+    
+    
+
+    return 0;
+}
