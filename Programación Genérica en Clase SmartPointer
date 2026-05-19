@@ -1,0 +1,46 @@
+//CON PROGRAMACIÓN GENÉRICA
+
+#include <iostream>
+#include <utility>
+template <class T>
+class SmartPointer{
+	private:
+		T* ptr;
+	public:
+		explicit SmartPointer(T* p = nullptr): ptr(p){}
+//				      '''''''''''''''''
+//				CONSTRUCTOR: recibe un puntero
+
+		~SmartPointer(){delete ptr;}
+//				'''''''''''
+//				DESTRUCTOR
+
+		SmartPointer(const SmartPointer&) = delete; //Constructor de copia el cual no puede existir en un unique pointer
+		
+		T& operator*(){return *ptr;} //Operador binario que no recibe nada, trabaja sobre el objeto
+
+		T* operator->(){return ptr;} //¿Qué significa?
+		SmartPointer& operator(SmartPointers&& other) noexcept{
+			delete ptr;
+			ptr = other.ptr;
+			other.ptr = nullptr;
+			std::cout<<"operator = de movimiento";
+			return *this;
+		
+		}
+
+		void Imprimir(){
+		std::cout<<*ptr<<"\n";
+		}
+
+
+};
+
+int main()
+{
+	SmartPointer<int> p(new int(10));
+	SmartPointer<int> q; 
+	p = std::move(q);
+	std::cout<<*q<<"\n";
+return 0;
+}
