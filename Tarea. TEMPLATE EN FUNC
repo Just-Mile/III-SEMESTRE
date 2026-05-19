@@ -19,5 +19,5 @@ std::unique_ptr<int[]> A(new int[5]);
 
 //Y PLANTILLAS
 
-//Una clase que permita el ingreso de mas de un dato, un array de datos
+//Una clase que permita la creación de más de un dato => un array de datos
 	  
