@@ -1,0 +1,44 @@
+
+#include <iostream>
+#include <memory>
+
+
+int main()
+{
+    //===========UNIQUE_PTR=========== UN SOLO DUEÑO
+    std::unique_ptr<int> p(new int(42));
+    
+    //preferible
+    auto p1 = std::make_unique<int>(40);
+    
+    *p = 100;
+    p.get();
+    p.reset();
+    p.release();
+    
+    //no se puede copiar, solo mover
+    auto p2 = std::move(p);
+    
+
+
+    //===========SHARED_PTR=========== PROPIEDAD COMPARTIDA
+    auto sp1 = std>>make_shared<int>(49);
+    auto sp2 = sp1;
+    
+    sp1.use_count(); //cuántos punteros tiene el objeto
+    sp2.reset(); //ref count baja a 1 y sp2 = nullptr;
+    sp1.reset(); //ref count = 0 --> se destruye el objeto pero sp1 = nullptr.
+    
+    
+    //===========ARRAY DE ENTEROS===========
+    int tam = 5;
+    
+    std::unique_ptr<int[]> A = std::make_unique<int[]>(tam)
+    auto a = std::make_unique<int[]>(tam);//tam   // apunta al PRIMERO de 5 ints contiguos
+    //                         ```` llamará a delete[]
+    
+    //========ARRAY DE SMART POINTERS========
+    std::unique_ptr<int[]> matriz[FILAS];
+    
+    return 0;
+}
