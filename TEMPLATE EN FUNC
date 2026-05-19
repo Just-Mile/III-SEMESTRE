@@ -1,0 +1,23 @@
+//UN TEMPLATE TAMBIÉN SE PUEDE USAR EN FUNCIONES
+
+template<class T>
+void f1(T dato){
+	return dato+1;
+}
+
+int main(){
+	std::cout<<f1(10)<<"\n";
+	
+	return 0;
+}
+
+//PUNTERO ÚNICO A UN ARRAY DE ENTEROS
+std::unique_ptr<int[]> A(new int[5]);
+
+
+//TRAITS: Especificación de una clase, una modificación que permita template <class T, class N>
+
+//Y PLANTILLAS
+
+//Una clase que permita el ingreso de mas de un dato, un array de datos
+	  
