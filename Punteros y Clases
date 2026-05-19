@@ -1,0 +1,28 @@
+//PUNTEROS Y CLASES
+class Miclase{
+	public:
+		int x;
+		int y;
+	MiClase(int a, int b){
+		x = a;
+		y = b;
+		}
+	void imprimir(){
+	std::cout<<x<<", "<<y<<"\n";
+	}
+		
+};
+int main(){
+	MiClase uno(5, 4);
+	//A. Puntero a Miembro Dato:
+	//	Quiero crear mi puntero que apunte al miembro dato de una clase
+	int MiClase:: * p = &MiClase::x; //p es un puntero a un miembro de esa clase que es MiClase
+	
+	std::cout<< uno.x <<"\n"; //uno es estancia que trabaja en stack
+	std::cout<< uno.*p <<"\n"; //equivalente, usando punteros
+
+	//cambio
+	p = &MiClase::y;
+
+return 0;
+}
