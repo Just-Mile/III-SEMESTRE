@@ -1,0 +1,51 @@
+#include <iostream>
+
+void Right(int* &p, int &i){
+    p++;
+};
+
+void Down(int* &p, int &col){
+    p+=col;
+};
+
+int main()
+{
+    int fil=12;
+    int col = 5;
+    int num = 1;
+
+    int A[fil*col]{0};
+    int tamR = 15;
+    int Recorrido[tamR]={1,0,0,0,0,0,1,1,0,0,0,0,0,1};
+    // 1 = HORIZONTAL | 0 = VERTICAL
+    
+    
+    for(int*q = A; q<A+(fil*col);q++) *q=num++;
+    
+    for(int*p=A; p<A+(fil*col);p+=col){
+        int* r = p;
+        for(; r < p+col; r++){
+            std::cout<<*r<<"\t";
+        }
+        std::cout<<"\n";
+    }
+  
+    //For a Recorrido
+    for(int* p = Recorrido; p<Recorrido+tamR; p++){
+        std::cout<<*p<<", ";
+    }
+    
+    std::cout<<"\n";
+    
+    //Array de punteros a func
+    void(*Moves[2])(int*&, int&)={&Right, &Down};
+      
+      
+/*  int* p = A;
+    std::cout<<*p<<"\n";
+    
+    Down(p, col);
+    std::cout<<*p;
+*/
+    return 0;
+}
