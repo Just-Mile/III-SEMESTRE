@@ -1,0 +1,40 @@
+//Veamos como es que se guardan los datos para determinar esta eficiencia
+
+#include <iostream>
+
+
+class Line{
+	private:
+		int a;
+		int b;
+	public:
+		Line(int x, int y):a(x),b(y){}
+		int operator()(int x){
+			return (a*x)+b;
+		}
+};
+
+template <class T>
+class LineT{
+	private:
+		T a;
+		T b;
+	public:
+		Line(T x, T y):a(x),b(y){}
+		T operator()(T x){
+			return (a*x)+b;
+		}
+};
+
+
+
+
+int main()
+{
+	LineT l1(4,2); //configuración
+	for(int x = 1; x<10; x++){
+		std::cout<<l1(x)<<", "; //Aquí estamos llamanda l1 como si fuera una función, ya no 		necesitamos iniciar l1(x, y) siempre
+	}	
+	
+	return 0;
+}
