@@ -1,22 +1,38 @@
 //PUNTEROS Y CLASES
-class Miclase{
+#include <iostream>
+
+class MiClase{
 	public:
 		int x;
 		int y;
-	MiClase(int a, int b){
-		x = a;
-		y = b;
-		}
+	MiClase(int a, int b):x(a),y(b){}
 	void imprimir(){
 	std::cout<<x<<", "<<y<<"\n";
 	}
+	
+	void imprimirX(){
+	    std::cout<<x;
+	}
 		
 };
+
+int aumentar(int a){
+    return ++a;
+}
+
+int disminuir(int a){
+    return --a;
+}
+
 int main(){
 	MiClase uno(5, 4);
-	//A. Puntero a Miembro Dato:
+	//==========================================
+	//=========A. PUNTERO A MIEMBRO DATO=======
+	//=========================================
+	
 	//	Quiero crear mi puntero que apunte al miembro dato de una clase
-	int MiClase:: * p = &MiClase::x; //p es un puntero a un miembro de esa clase que es MiClase
+	
+	int MiClase:: * p = &MiClase::x; //p es un puntero a un miembro de la clase MiClase
 	
 	std::cout<< uno.x <<"\n"; //uno es estancia que trabaja en stack
 	std::cout<< uno.*p <<"\n"; //equivalente, usando punteros
@@ -24,5 +40,26 @@ int main(){
 	//cambio
 	p = &MiClase::y;
 
+    //=====================================
+    //==========PUNTERO A MÉTODO===========
+    //=====================================
+    
+    //void(MiClase::*q)(); // q es un puntero a un método
+    //q = & MiClase::imprimir(); //la dirección de un mimembro de la clase
+    
+    void(MiClase::*q)() = &MiClase::imprimir;
+    uno.imprimir();
+    (uno.*q)(); //En () por su hubiera parámetros
+
+
+    //==========================================
+    //===========C.PUNTERO A FUNCIÓN============
+    //==========================================
+    int(*r)(int) = aumentar;
+    int x = 10;
+    r(x);
+    std::cout<<x;
+    r = disminuir;    
+    
 return 0;
 }
