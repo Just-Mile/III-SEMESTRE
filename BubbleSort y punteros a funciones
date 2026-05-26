@@ -1,39 +1,73 @@
+
 #include <iostream>
+int mayorqueabs(int a, int b){
+    return 2;    
+}
+
+int mayorque(int a, int b){
+    return a>b;    
+}
+
+int menorque(int a, int b){
+    return a<b;
+}
+
+void BubbleSort(int A[], int n, int(*comp)(int, int)){
+    int i, j, temp;
+    for(i = 0; i<n;i++){
+        for(j = 0; j<n-1;j++){
+            if(comp (A[j], A[j+1])){
+                temp = A[j];
+                A[j] = A[j+1];
+                A[j+1] = temp;
+            }
+        }
+    }
+}
 
 class MiClase{
     public:
-    char x;
+    char x=1;
     char y;
     void imprimir(char z){
         std::cout<<x<<", "<<z<<"\n";
     }
 };
 
+
 int main()
 {
-    int(*q)(int, int); //puntero a funcion
+    int(*q)(int, int);
     q = &mayorque;
     std::cout<<q(3, 6)<<"\n";
-    
     
     void(MiClase::*r)(char); //puntero a método
     r = &MiClase::imprimir;
     //int* arr[3] //array de punteros
     MiClase obj; //para usar el puntero a método: Necesitamos instancia o puntero de la clase (MiClase)
-    obj.*r('d');//contenido del puntero a mtodo
+    (obj.*r)('d');//contenido del puntero a mtodo
     
-    int t=3;
-    int(*arr[t])(int, int)={&mayorque, &menorque, &mayorqueabs};
-    q = mayorque;
+    
     int tam = 5;
-    int A[]={3, -1, 2, 6, -4};
-    BubbleSort(A, tam, arr[2]);
-    for(int*p=A;p<A+tam;p++){
+    int A[] = {3, -1, 2, 6, -4};
+    BubbleSort(A, tam, q);
+    for(int *p = A;p<A+tam;p++){
         std::cout<<*p<<", ";
     }
     std::cout<<"\n";
-    for(int(*(r))(int, int)=arr;r<arr+t;r++){
-        
+    
+    
+    int t = 3;
+    int (*B[t])(int, int) = {mayorqueabs, mayorque, menorque};
+    
+    
+    for(int (*(*C))(int, int) = B; C != B+ t;C++){
+        BubbleSort(A, tam, *C);
+        for(int*p = A; p<A+tam;p++){
+            std::cout<<*p<<",";
+        }
+        std::cout<<"\n";
+
     }
     
     return 0;
