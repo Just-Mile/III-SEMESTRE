@@ -1,12 +1,21 @@
 #include <iostream>
 
-void Right(int* &p, int &i){
+void Right(int* &p, int &col){
     p++;
 };
 
 void Down(int* &p, int &col){
     p+=col;
 };
+
+
+class Movimiento{
+    public:
+    void Right(int* &p, int &col){p +=1; }
+    void Down (int* &p, int &col){p += col;}
+};
+
+
 
 int main()
 {
@@ -36,11 +45,53 @@ int main()
     }
     
     std::cout<<"\n";
+    std::cout<<"\n";
     
     //Array de punteros a func
-    void(*Moves[2])(int*&, int&)={&Right, &Down};
+    void(*Moves[2])(int*&, int&)={&Down, &Right};
       
-      
+    //Aplicar recorrido a la amtriz
+    int* p = A;
+    *p = 0;
+    
+    for(int* q = Recorrido; q<Recorrido + tamR; q++){
+        Moves[*q](p, col);
+        *p= 0;
+    }
+    
+    //Imprimir matriz
+    for(int* p = A; p < A + (fil * col); p += col){
+        for(int* r = p; r < p + col; r++)
+            std::cout << *r << "\t";
+        std::cout << "\n";
+    }
+    
+    /*
+    ==============PARTE H==============
+    
+    Movimiento mov;
+    //Retorna void, recibe (int*&, int&)
+    void(Movimiento::*Moves_arr[2])(int*&, int&) = {
+        &Movimiento::Down, &Movimiento::Right //puntero a método
+    };
+    
+    int* p = A;
+    *p = 0;
+    
+    for(int* q = Recorrido; q<Recorrido + tamR; q++){
+        mov.Moves_arr[*q](p, col);
+        *p= 0;
+    }
+    
+    //Imprimir matriz
+    for(int* p = A; p < A + (fil * col); p += col){
+        for(int* r = p; r < p + col; r++)
+            std::cout << *r << "\t";
+        std::cout << "\n";
+    }
+    */
+    
+    
 /*  int* p = A;
     std::cout<<*p<<"\n";
     
