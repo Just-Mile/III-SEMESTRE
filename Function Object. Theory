@@ -1,0 +1,34 @@
+//FUNCTION OBJECT || Smart Function
+// Objeto que representa una función
+// Aseguramos que será eficiente.
+// VENTAJA:
+//	posibilidad de guardar datos en una función
+
+//CLASE COMUN
+class miFuncion{
+	private:
+		int x;
+		int y;
+	public:
+		miFuncion(int a, int b):x(a), y(b){};
+		int operator()(int z){ //LA DIEFERENCIA Sobrecarga del operador paréntesis,
+			return x*y*z;
+		} 
+
+};
+
+void main(){
+	miFuncion F1(5, 2);
+	std::cout<<F1(3); //Funcion que llama a los paréntesis
+			  // Entonces, ya no tengo que indicar cual es x, y, sino SOLO lo que cambia
+			  //Imprimirá 30
+
+// Entonces: Podemos preguntarnos, ¿Qué es más eficiente: Polimorfismo clásico (el método se porta de diferentes formas) o Function Object (que recibe un function object para que se comporte de distintas maneras)?
+// ---> Rpta:
+//	 POLIMORFISMO: Se demora porque se hace en tiempo de ejecución.
+//		       Pero si no necesitamos tanta velocidad tengo muchos requerimientos y quiero 		       mantener un código más mantenibles. Donde podría heredar y cambiar el 			       comportamiento.
+//N
+
+//	 FUNCTION OBJECT sin polimorfismo es más EFICIENTE.
+
+}
