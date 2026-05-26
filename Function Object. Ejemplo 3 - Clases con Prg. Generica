@@ -1,0 +1,30 @@
+#include <iostream>
+
+//EJEMPLO FUNCTION OOBJECT
+
+template <class T, int n = 0>
+class Suma{
+    private:
+        T x = n;
+    public:
+        T operator()(T op){
+            return x+op;
+        }
+};
+
+template <class O>
+class Ejecuta{
+    public:
+        O operador;
+};
+
+int main()
+{
+    //suma<int> objsuma;
+    Ejecuta<Suma<int>> exo; //Suma está por defecto n = 0
+    Ejecuta<Suma<int, 10>> exe; //Aquí n ya tiene valor
+    
+    std::cout<<exe.operador(5)<<"\n";
+
+    return 0;
+}
