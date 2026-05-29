@@ -1,0 +1,56 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool mult(int x, int y){
+    if (x%y==0)return true;
+    return false;
+}
+
+class mult2{
+    private:
+        int y;
+    public:
+    mult2(int b):y(b){}
+    bool operator () (int x){
+        if (x%y==0)return true;
+        return false;
+    }
+
+};
+
+vector<int> f_match(vector<int> v,bool(*f)(int,int)){
+    vector<int> res;
+    vector<int>:: iterator it=v.begin();
+    vector<int>:: iterator end=v.end();
+    while(it!=end){
+        if(f(*it,2)){
+            res.push_back(*it);
+        }
+        it++;
+    }
+    return res;
+
+}
+
+vector<int> f_match(vector<int> v,mult2 f){
+    vector<int> res;
+    vector<int>:: iterator it=v.begin();
+    vector<int>:: iterator end=v.end();
+    while(it!=end){
+        if(f(*it)){
+            res.push_back(*it);
+        }
+        it++;
+    }
+    return res;
+
+}
+int main(){
+    vector<int> v1={1,2,3,4,5};
+    bool (*f1)(int,int)=mult;
+    mult2 m(2);
+    vector <int>v2=f_match(v1,m);
+    for(vector<int>::iterator it=v2.begin();it<v2.end();++it){cout<<*it<<" ";} //!=
+
+}
