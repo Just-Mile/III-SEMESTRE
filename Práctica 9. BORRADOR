@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+void BubbleSort(int A[], int n, int ){
+	
+}
+
+template<class T>
+	std::vector<int> find_matching(std::vector<int> v,T f){
+	std::vector<int> res;
+	std::vector<int>::iterator it=v.begin();
+	std::vector<int>::iterator end=v.end();
+	while(it!= end)
+	{
+		if(f(*it))
+			res.push_back(*it);
+		it++;
+	}
+	return res;
+}
+	
+
+template <class T>
+bool Ascendente(T a, T b){
+	a = abs(a);
+	b = abs(b);
+	
+	if(a>b) return true;
+	else return false;
+}
+
+template <class T, C>
+ordenamiento(T* vector, C criterio){
+	
+}
+
+
+int main(int argc, char *argv[]) {
+	
+	std::srand(std::time(0));
+	const int elem = 4;
+	int A[elem];
+	int num;
+	for(int* p = A; p < A+elem; p++){
+		num= 1 + (std::rand() % 999);
+		*p=num;
+	}
+	return 0;
+}
+
+//criterio como array de funciones para probar con acda una(?
+// Puntero a
+//	Función, Function Object, Online Function Object y Polimorfismo.
+//struct
