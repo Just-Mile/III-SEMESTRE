@@ -4,6 +4,15 @@ using namespace std;
 const int FILAS = 8;
 const int COLS = 8;
 
+/*==========================================================
+//EJEMPLO USANDO TEMPLATES
+template <typename T>
+void alfilSuperiorIzquierdo(T* pieza, T (*tablero)[COLS]) {
+    T* destino = pieza - COLS - 1;
+    cout<< *destino<<endl;
+}
+============================================================*/
+
 void alfilSuperiorIzquierdo(int* pieza, int (*tablero)[COLS]) {
     int* destino = pieza - COLS - 1;
     cout<< *destino<<endl;
@@ -44,11 +53,23 @@ int main()
         alfilSuperiorDerecho,
         alfilInferiorIzquierdo,
         alfilInferiorDerecho
-    }
+    };
     
     for(int i = 0; i<4; i++){
         funciones[i](pieza, tablero);
     }
+    /*
+    for (auto func_ptr = funciones; func_ptr < funciones + 4; func_ptr++) {
+        (*func_ptr)(pieza, tablero);
+    }
+    */
+
+    /*
+     for (auto func_ptr = funciones; func_ptr < funciones + 4; func_ptr++) {
+        (*func_ptr)(pieza, tablero);
+    }
+    
+    */
     
     return 0;
 }
